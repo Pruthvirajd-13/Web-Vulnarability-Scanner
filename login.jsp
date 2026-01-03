@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RapidScan - Log in or Sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Scanning Background -->
+    <div class="bg-scanning">
+        <div class="scan-line"></div>
+        <div class="bg-grid"></div>
+        <div class="bg-glow"></div>
+    </div>
+
+    <div class="container">
+        <h2>Rapid<span style="color: #ffcc00;">Scan</span></h2>
+        <p style="color: #b0b8c4; margin-bottom: 25px; font-size: 14px;">Log in or Sign up to continue</p>
+
+        <!-- Status Message -->
+        <div id="statusMessage" class="status-message hidden"></div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" id="loginTab">Log in</button>
+            <button class="tab" id="signupTab">Sign up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Your@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <div class="password-header">
+                    <label>Password</label>
+                    <a href="#" class="forgot">Forgot password?</a>
+                </div>
+                <div class="password-box">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fas fa-eye" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <div class="form-group remember">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Log in <span class="shortcut">Ctrl</span> <span class="shortcut">Enter</span>
+            </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="hidden">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" placeholder="John" required>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="outlook@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-box">
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <i class="fas fa-eye toggleSignupPassword"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Sign up now <span class="shortcut">Ctrl</span> <span class="shortcut">Enter</span>
+            </button>
+        </form>
+
+        <div class="divider">OR</div>
+
+        <button class="social google" id="googleBtn">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+            <span>Log in with Google</span>
+        </button>
+
+        <button class="social microsoft" id="microsoftBtn">
+            <img src="https://www.svgrepo.com/show/448239/microsoft.svg">
+            <span>Log in with Microsoft</span>
+        </button>
+
+        <p class="footer-text hidden" id="footerText">
+            By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>,
+            and consent to data transfer, hosting and processing outside the EU.
+        </p>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+
+</html>

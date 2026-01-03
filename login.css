@@ -1,0 +1,378 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --bg-color: #0d1117;
+    --text-color: #ffffff;
+    --primary-color: #ffcc00;
+    --secondary-text: #b0b8c4;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+/* Scanning Background - Reused from landing */
+.bg-scanning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.bg-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(255, 204, 0, 0.05) 0%, transparent 40%);
+}
+
+.scan-line {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.1), transparent);
+    box-shadow: 0 10px 50px rgba(59, 130, 246, 0.2);
+    animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+    0% {
+        top: -100px;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+.container {
+    width: 420px;
+    padding: 65px 45px;
+    background: rgba(22, 27, 34, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+h2 {
+    margin-bottom: 5px;
+    font-weight: 800;
+    font-size: 32px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 25px;
+    padding: 4px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--secondary-text);
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.tab.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Form */
+form {
+    text-align: left;
+}
+
+label {
+    font-size: 13px;
+    color: var(--secondary-text);
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
+}
+
+.password-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.password-header label {
+    margin-bottom: 0;
+}
+
+.forgot {
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.password-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-box input {
+    padding-right: 45px;
+    /* Space for the eye icon */
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember label {
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Login Button */
+.login-btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-btn:hover {
+    background: #e6b800;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
+}
+
+.shortcut {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+/* Divider */
+.divider {
+    margin: 30px 0;
+    font-size: 12px;
+    color: var(--secondary-text);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Social buttons */
+.social {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.social:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.social img {
+    width: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Status Message */
+.status-message {
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    animation: slideDown 0.3s ease;
+}
+
+.status-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Signup specific */
+/* Stacked naturally */
+
+
+/* Ensure text inputs match email/password inputs */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.password-box {
+    position: relative;
+}
+
+/* Shared style for both toggle buttons */
+#togglePassword,
+.toggleSignupPassword {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--secondary-text);
+    background: transparent;
+    border: none;
+    padding: 10px;
+    /* Increase click area */
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    top: 0;
+}
+
+.footer-text {
+    font-size: 11px;
+    color: var(--secondary-text);
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 30px;
+}
+
+.footer-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
