@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RapidScan Tools - Website Vulnerability Scanner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="website_scanner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar (Same as dashboard) -->
+    <aside class="sidebar">
+        <div class="logo-area" style="display: flex; align-items: center; padding: 25px 20px;">
+            <div
+                style="background: #ffcc00; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                <i class="fas fa-shield-alt" style="color: #000; font-size: 16px;"></i>
+            </div>
+            <span style="font-weight: 800; font-size: 20px; color: white;">RapidScan <span
+                    style="color: #ffcc00;">Tools</span></span>
+        </div>
+
+        <button class="new-scan-btn">
+            <i class="fas fa-bolt"></i> New scan
+        </button>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="assets.html" class="nav-item">
+                <i class="fas fa-bullseye"></i> Assets <span class="badge">2</span>
+            </a>
+            <a href="scans.html" class="nav-item">
+                <i class="fas fa-heartbeat"></i> Scans
+            </a>
+            <a href="tools.html" class="nav-item active">
+                <i class="fas fa-tools"></i> Tools
+            </a>
+            <a href="findings.html" class="nav-item">
+                <i class="fas fa-bug"></i> Findings
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-file-alt"></i> Reports
+            </a>
+            <a href="#" class="nav-item" id="logoutBtn" style="margin-top: auto; color: #ff6b6b;">
+                <i class="fas fa-sign-out-alt"></i> Log out
+            </a>
+        </nav>
+    </aside>
+
+    <div class="content-wrapper">
+        <div class="container-centered">
+            <div class="scanner-header">
+                <a href="tools.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Tools</a>
+                <h1>Website Scanner</h1>
+                <p>Find vulnerabilities (SQLi, XSS, etc.) and server misconfigurations.</p>
+            </div>
+
+            <!-- Scanner Input Section -->
+            <div class="scanner-card">
+                <div class="input-group">
+                    <i class="fas fa-globe"></i>
+                    <input type="text" id="targetUrl" placeholder="https://example.com" value="https://">
+                    <button id="startScanBtn">Start Scan</button>
+                </div>
+                <div class="scan-options">
+                    <label><input type="checkbox" checked> Light Scan</label>
+                    <label><input type="checkbox"> Full Scan (Auth required)</label>
+                </div>
+            </div>
+
+            <!-- Progress Section (Hidden initially) -->
+            <div id="scanProgress" class="scan-progress hidden">
+                <div class="progress-status">
+                    <span id="scanStatusText">Initializing...</span>
+                    <span id="scanPercentage">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <div class="terminal-log" id="terminalLog">
+                    <!-- Logs will appear here -->
+                </div>
+            </div>
+
+            <!-- Results Section (Hidden initially) -->
+            <div id="scanResults" class="scan-results hidden">
+                <div class="result-summary">
+                    <div class="risk-score">
+                        <span class="score-label">Risk Score</span>
+                        <span class="score-value" id="riskScore">B</span>
+                    </div>
+                    <div class="vuln-counts">
+                        <div class="count-item high"><span id="highCount">0</span> High</div>
+                        <div class="count-item medium"><span id="mediumCount">0</span> Medium</div>
+                        <div class="count-item low"><span id="lowCount">0</span> Low</div>
+                    </div>
+                </div>
+
+                <div class="findings-list" id="findingsList">
+                    <!-- Findings will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="scanner.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-/*
+
 
 
 
@@ -86,7 +86,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // Optionally fetch user info if needed
         setTimeout(() => {
-            window.location.href = "../Dashboard/dashboard.jsp";
+            window.location.href = "dashboard.html";
         }, 1500);
     }
 });
@@ -104,11 +104,11 @@ document.addEventListener("keydown", (e) => {
 
 // --- BACKEND API INTEGRATION ---
 
-/* const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "/Web_Vulnerability_Scanner/auth"; // Adjust context path as needed
 
 async function loginUser(email, password) {
     try {
-        const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -118,20 +118,20 @@ async function loginUser(email, password) {
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (data.success) { // logic changed slightly to match Servlet response
             return { success: true, data };
         } else {
             return { success: false, message: data.message || "Login failed" };
         }
     } catch (error) {
         console.error("Login Error:", error);
-        return { success: false, message: "Could not connect to server. Please ensure the backend is running on port 8080." };
+        return { success: false, message: "Could not connect to server." };
     }
 }
 
 async function signupUser(firstName, lastName, email, password) {
     try {
-        const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+        const response = await fetch(`${API_BASE_URL}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -141,14 +141,14 @@ async function signupUser(firstName, lastName, email, password) {
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (data.success) {
             return { success: true, message: "User registered successfully" };
         } else {
             return { success: false, message: data.message || "Signup failed" };
         }
     } catch (error) {
         console.error("Signup Error:", error);
-        return { success: false, message: "Could not connect to server. Please ensure the backend is running on port 8080." };
+        return { success: false, message: "Could not connect to server." };
     }
 }
 
@@ -197,7 +197,7 @@ loginForm.addEventListener("submit", async (e) => {
         }
         showStatus("Login successful! Redirecting...", "success");
         setTimeout(() => {
-            window.location.href = "../Dashboard/dashboard.jsp";
+            window.location.href = "dashboard.html";
         }, 1000);
     } else {
         showStatus(result.message, "error");
@@ -237,4 +237,4 @@ signupForm.addEventListener("submit", async (e) => {
 });
 
 
-*/
+

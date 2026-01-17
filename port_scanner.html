@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RapidScan Tools - Online Port Scanner (Nmap)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="scanner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo-area" style="display: flex; align-items: center; padding: 25px 20px;">
+            <div
+                style="background: #ffcc00; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                <i class="fas fa-shield-alt" style="color: #000; font-size: 16px;"></i>
+            </div>
+            <span style="font-weight: 800; font-size: 20px; color: white;">RapidScan <span
+                    style="color: #ffcc00;">Tools</span></span>
+        </div>
+
+        <button class="new-scan-btn">
+            <i class="fas fa-bolt"></i> New scan
+        </button>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="assets.html" class="nav-item">
+                <i class="fas fa-bullseye"></i> Assets <span class="badge">2</span>
+            </a>
+            <a href="scans.html" class="nav-item">
+                <i class="fas fa-heartbeat"></i> Scans
+            </a>
+            <a href="tools.html" class="nav-item active">
+                <i class="fas fa-tools"></i> Tools
+            </a>
+            <a href="findings.html" class="nav-item">
+                <i class="fas fa-bug"></i> Findings
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-file-alt"></i> Reports
+            </a>
+            <a href="#" class="nav-item" id="logoutBtn" style="margin-top: auto; color: #ff6b6b;">
+                <i class="fas fa-sign-out-alt"></i> Log out
+            </a>
+        </nav>
+    </aside>
+
+    <div class="content-wrapper">
+        <div class="container-centered">
+            <div class="scanner-header">
+                <a href="tools.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Tools</a>
+                <h1>Port Scanner with Nmap</h1>
+                <p>Discover open TCP/UDP ports and detect service versions using Nmap.</p>
+            </div>
+
+            <!-- Scanner Input Section -->
+            <div class="scanner-card">
+                <div class="input-group">
+                    <i class="fas fa-server"></i>
+                    <input type="text" id="targetHost" placeholder="hostname or IP address" value="">
+                    <button id="startPortScanBtn">Scan Ports</button>
+                </div>
+                <div class="scan-options" style="flex-wrap: wrap;">
+                    <label>
+                        <input type="radio" name="scanType" value="common" checked> Common ports (Top 100)
+                    </label>
+                    <label>
+                        <input type="radio" name="scanType" value="full"> All TCP ports (1-65535)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="detectService" checked> Service Version (-sV)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="detectOS"> OS Detection (-O)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Progress Section -->
+            <div id="scanProgress" class="scan-progress hidden">
+                <div class="progress-status">
+                    <span id="scanStatusText">Initializing Nmap...</span>
+                    <span id="scanPercentage">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <div class="terminal-log" id="terminalLog">
+                    <!-- Logs will appear here -->
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="scanResults" class="scan-results hidden">
+
+                <!-- Nmap Raw Output Style -->
+                <div class="nmap-output-card"
+                    style="background: #1e1e1e; color: #ccc; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">
+                    <span style="color: #6a9955;"># Nmap 7.92 scan initiated as: nmap -sV -O --top-ports 100 -oN
+                        result.txt
+                        <span id="displayTarget">target</span></span>
+                    Nmap scan report for <span id="reportTarget" style="font-weight: bold; color: white;">target</span>
+                    Host is up (0.043s latency).
+                    Not shown: 96 filtered tcp ports (no-response)
+
+                    <span style="color: #569cd6; font-weight: bold;">PORT STATE SERVICE VERSION</span>
+                    <span id="nmapResultsBody"></span>
+                    Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+                    # Nmap done at <span id="scanTime"></span> -- 1 IP address (1 host up) scanned in 12.45 seconds
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Reusing dashboard.js for sidebar/logout logic -->
+    <script src="dashboard.js"></script>
+    <script src="port_scanner.js"></script>
+</body>
+
+</html>

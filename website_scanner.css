@@ -1,0 +1,284 @@
+/* ===============================
+   Scanner Specific Styles
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+.scanner-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.scanner-header {
+    margin-bottom: 30px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--text-primary);
+}
+
+/* ---------- Scanner Card ---------- */
+.scanner-card {
+    background: var(--card-bg);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Input Group ---------- */
+.input-group {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 15px;
+    background: #0b1120;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+.input-group:focus-within {
+    border-color: var(--accent-color);
+}
+
+.input-group i {
+    margin-right: 10px;
+    color: var(--text-secondary);
+}
+
+.input-group input {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--text-primary);
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.input-group button {
+    padding: 12px 25px;
+    border-radius: 6px;
+    border: none;
+    background: #ffcc00;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.input-group button:hover {
+    background: #e6b800;
+}
+
+/* ---------- Scan Options ---------- */
+.scan-options {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* ---------- Progress Section ---------- */
+.scan-progress {
+    background: var(--card-bg);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.progress-status {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.progress-bar-bg {
+    height: 8px;
+    margin-bottom: 15px;
+    background: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-color);
+    transition: width 0.3s ease-in-out;
+}
+
+/* ---------- Terminal Log ---------- */
+.terminal-log {
+    height: 150px;
+    padding: 15px;
+    background: #1e1e1e;
+    color: #00ff00;
+    border-radius: 6px;
+    overflow-y: auto;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.log-entry {
+    margin-bottom: 5px;
+}
+
+/* ---------- Results ---------- */
+.scan-results {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Summary ---------- */
+.result-summary {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Risk Score */
+.risk-score {
+    flex: 1;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.score-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.score-value {
+    margin-top: 5px;
+    font-size: 48px;
+    font-weight: 800;
+    color: #2ecc71;
+}
+
+.score-value.risk-B {
+    color: #f1c40f;
+}
+
+.score-value.risk-C {
+    color: #e67e22;
+}
+
+.score-value.risk-D {
+    color: #e74c3c;
+}
+
+/* ---------- Vulnerability Counts ---------- */
+.vuln-counts {
+    flex: 2;
+    display: flex;
+    gap: 15px;
+}
+
+.count-item {
+    flex: 1;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.count-item span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+.count-item.high span {
+    color: #e74c3c;
+}
+
+.count-item.medium span {
+    color: #f1c40f;
+}
+
+.count-item.low span {
+    color: #3498db;
+}
+
+/* ---------- Findings ---------- */
+.finding-card {
+    padding: 20px;
+    margin-bottom: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border-left: 5px solid #ccc;
+}
+
+.finding-card.high {
+    border-left-color: #e74c3c;
+}
+
+.finding-card.medium {
+    border-left-color: #f1c40f;
+}
+
+.finding-card.low {
+    border-left-color: #3498db;
+}
+
+.finding-card.info {
+    border-left-color: #2ecc71;
+}
+
+.finding-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.finding-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.finding-severity {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.finding-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+}

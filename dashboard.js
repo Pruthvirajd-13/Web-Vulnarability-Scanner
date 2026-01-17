@@ -1,112 +1,117 @@
-// // Basic Dashboard Logic
 
-// const API_BASE_URL = "http://localhost:8080/api";
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Dashboard loaded");
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     console.log("Dashboard loaded");
+    // Check for Authentication (Mock logic if running locally without backend)
+    // In a real scenario, you'd check a session cookie or token.
+    const currentUser = localStorage.getItem('currentUser');
 
-//     // Check for Authentication
-//     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-//     const authToken = localStorage.getItem('authToken');
+    // Simple redirect protection (optional, remove if testing without login)
+    // if (!currentUser) {
+    //     window.location.href = "login.html";
+    // }
 
-//     if (!currentUser) {
-//         // Redirect to login if no user is found
-//         window.location.href = "../Login/login.jsp";
-//         return;
-//     }
+    // Logout Functionality
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('authToken');
+            window.location.href = "login.html";
+        });
+    }
 
-//     // Optional: Display user name
-//     // const userNameDisplay = document.getElementById('userNameDisplay');
-//     // if (userNameDisplay && currentUser.firstName) {
-//     //     userNameDisplay.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
-//     // }
+    // --- Sidebar Navigation ---
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Prevent default anchor behavior unless it's a real link
+            const href = item.getAttribute('href');
+            if (href === '#' || href === '') {
+                e.preventDefault();
+            }
 
-//     // Fetch Dashboard Data
-//     fetchDashboardStats();
+            // Remove active class from all
+            navItems.forEach(nav => nav.classList.remove('active'));
+            // Add active to clicked
+            item.classList.add('active');
+        });
+    });
 
-//     // Tab switching logic (Visual only for now)
-//     const tabs = document.querySelectorAll('.tab-link');
-//     tabs.forEach(tab => {
-//         tab.addEventListener('click', () => {
-//             tabs.forEach(t => t.classList.remove('active'));
-//             tab.classList.add('active');
-//         });
-//     });
+    // --- Tab Switching ---
+    const tabs = document.querySelectorAll('.tab-link');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
 
-//     // Mobile sidebar toggle (optional)
-//     const toggleBtn = document.querySelector('.toggle-menu');
-//     const sidebar = document.querySelector('.sidebar');
+            // Here you would also toggle content visibility
+            // For now, we just visually switch tabs
+        });
+    });
 
-//     if (toggleBtn) {
-//         toggleBtn.addEventListener('click', () => {
-//             sidebar.style.display = sidebar.style.display === 'none' ? 'flex' : 'none';
-//         });
-//     }
+    // --- Buttons ---
 
-//     // Logout Functionality
-//     const logoutBtn = document.getElementById('logoutBtn'); // Assuming you might have one
-//     if (logoutBtn) {
-//         logoutBtn.addEventListener('click', () => {
-//             localStorage.removeItem('currentUser');
-//             localStorage.removeItem('authToken');
-//             window.location.href = "../Login/login.jsp";
-//         });
-//     }
-// });
+    // "New Scan" Button
+    const newScanBtn = document.querySelector('.new-scan-btn');
+    if (newScanBtn) {
+        newScanBtn.addEventListener('click', () => {
+            window.location.href = 'new_scan.html';
+        });
+    }
 
-// async function fetchDashboardStats() {
-//     try {
-//         const authToken = localStorage.getItem('authToken');
-//         const headers = {
-//             "Content-Type": "application/json"
-//         };
+    // "Start a scan" Buttons (Empty State)
+    const startScanBtns = document.querySelectorAll('.start-scan-btn');
+    startScanBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            alert("Starting New Scan Wizard...\n(Feature implementation coming soon)");
+        });
+    });
 
-//         if (authToken) {
-//             headers["Authorization"] = `Bearer ${authToken}`;
-//         }
+    // "View Scans" Link
+    const viewScansLink = document.querySelector('.section-header .link-text');
+    if (viewScansLink) {
+        viewScansLink.style.cursor = "pointer"; // Make it look clickable
+        viewScansLink.addEventListener('click', () => {
+            // Simulate navigation to 'Scans' tab
+            // Find the 'Scans' nav item and click it
+            const scansNav = Array.from(navItems).find(i => i.innerText.includes('Scans'));
+            if (scansNav) scansNav.click();
+            alert("Navigating to Scan History...");
+        });
+    }
 
-//         const response = await fetch(`${API_BASE_URL}/dashboard/stats`, {
-//             method: "GET",
-//             headers: headers
-//         });
+    // Workspace Selector
+    const workspaceSelector = document.querySelector('.workspace-selector');
+    if (workspaceSelector) {
+        workspaceSelector.addEventListener('click', () => {
+            alert("Workspace switching menu would open here.");
+        });
+    }
 
-//         if (response.ok) {
-//             const data = await response.json();
-//             updateDashboardUI(data);
-//         } else {
-//             console.error("Failed to fetch dashboard stats", response.status);
-//             if (response.status === 401 || response.status === 403) {
-//                 // Token invalid/expired
-//                 localStorage.removeItem('currentUser');
-//                 localStorage.removeItem('authToken');
-//                 window.location.href = "../Login/login.jsp";
-//             }
-//         }
-//     } catch (error) {
-//         console.error("Error fetching dashboard stats:", error);
-//     }
-// }
+    // Mock Data Loading (Visual update)
+    updateDashboardCounts();
+});
 
-// function updateDashboardUI(data) {
-//     // Example: Update elements by ID. Adjust IDs based on your actual HTML structure.
+function updateDashboardCounts() {
+    // Simulate fetching data
+    setTimeout(() => {
+        const counts = {
+            assets: 3,
+            running: 1,
+            waiting: 5,
+            added: 12
+        };
 
-//     // Example mapping based on previous server.js mock data:
-//     // scannedAssets: { current: 0, total: 5 }
-//     // runningScans: { current: 0, total: 2 }
-//     // waitingScans: { current: 0, total: 25 }
-//     // addedAssets: { current: 0, total: 100 }
+        const setVal = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+        };
 
-//     // You likely need to add IDs to the `dashboard.html` elements to make this work.
-//     // For now, I'll log the data so you can see it's working, and try to find generic elements.
-//     console.log("Dashboard Data:", data);
-
-//     const updateElement = (id, value) => {
-//         const el = document.getElementById(id);
-//         if (el) el.innerText = value;
-//     };
-
-//     if (data.scannedAssets) updateElement('scanned-assets-count', data.scannedAssets.total);
-//     if (data.runningScans) updateElement('running-scans-count', data.runningScans.total);
-//     if (data.waitingScans) updateElement('waiting-scans-count', data.waitingScans.total);
-//     if (data.addedAssets) updateElement('added-assets-count', data.addedAssets.total);
-// }
+        setVal('scanned-assets-count', counts.assets);
+        setVal('running-scans-count', counts.running);
+        setVal('waiting-scans-count', counts.waiting);
+        setVal('added-assets-count', counts.added);
+    }, 500);
+}

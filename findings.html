@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RapidScan Tools - Findings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-select {
+            background: #0B1120;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .search-input {
+            background: #0B1120;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            width: 250px;
+        }
+
+        .export-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .export-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Severity Badges specific to table cell */
+        .cvss-score {
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo-area" style="display: flex; align-items: center; padding: 25px 20px;">
+            <div
+                style="background: #ffcc00; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                <i class="fas fa-shield-alt" style="color: #000; font-size: 16px;"></i>
+            </div>
+            <span style="font-weight: 800; font-size: 20px; color: white;">RapidScan <span
+                    style="color: #ffcc00;">Tools</span></span>
+        </div>
+
+        <button class="new-scan-btn">
+            <i class="fas fa-bolt"></i> New scan
+        </button>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="assets.html" class="nav-item">
+                <i class="fas fa-bullseye"></i> Assets <span class="badge">2</span>
+            </a>
+            <a href="scans.html" class="nav-item">
+                <i class="fas fa-heartbeat"></i> Scans
+            </a>
+            <a href="tools.html" class="nav-item">
+                <i class="fas fa-tools"></i> Tools
+            </a>
+            <a href="findings.html" class="nav-item active">
+                <i class="fas fa-bug"></i> Findings
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-file-alt"></i> Reports
+            </a>
+            <a href="#" class="nav-item" id="logoutBtn" style="margin-top: auto; color: #ff6b6b;">
+                <i class="fas fa-sign-out-alt"></i> Log out
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="page-header">
+            <div>
+                <h2 style="margin: 0; font-size: 24px;">Findings</h2>
+                <p style="color: var(--text-secondary); margin-top: 5px;">Manage and remediate security vulnerabilities.
+                </p>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <i class="fas fa-filter" style="color: var(--text-secondary);"></i>
+                <select class="filter-select" id="severityFilter">
+                    <option value="all">All Severities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <select class="filter-select" id="statusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="open">Open</option>
+                    <option value="fixed">Fixed</option>
+                    <option value="false-positive">False Positive</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <input type="text" placeholder="Search vulnerability name..." class="search-input" id="searchInput">
+            </div>
+            <button class="export-btn"><i class="fas fa-file-export"></i> Export CSV</button>
+        </div>
+
+        <!-- Findings Table -->
+        <div class="table-card full-width">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th style="width: 30%;">Vulnerability</th>
+                        <th>Target</th>
+                        <th>CVSS</th>
+                        <th>Status</th>
+                        <th>Found</th>
+                        <th style="text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="findingsTableBody">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="findings.js"></script>
+</body>
+
+</html>
